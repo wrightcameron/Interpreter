@@ -13,6 +13,7 @@ public class Scanner {
 	private Set<String> whitespace = new HashSet<String>();
 	private Set<String> letters = new HashSet<String>();
 	private Set<String> keywords = new HashSet<String>();
+	private Set<String> numbers = new HashSet<String>();
 
 	// constructor:
 	// - squirrel-away source program
@@ -24,6 +25,7 @@ public class Scanner {
 		initWhitespace(whitespace);
 		initLetters(letters);
 		initKeywords(keywords);
+		initNumbers(numbers);
 	}
 
 	private void initKeywords(Set<String> keywords2) {
@@ -45,6 +47,10 @@ public class Scanner {
 		s.add(" ");
 		s.add("\n");
 		s.add("\t");
+	}
+
+	private void initNumbers(Set<String> s) {
+		fill(s, '0', '9');
 	}
 
 	// handy string-processing methods
@@ -75,14 +81,22 @@ public class Scanner {
 
 		if (letters.contains(c)) {
 			nextKwID();
+		} else if (numbers.contains(c)) {
+			nextKwNum();
 		}
-		// else if ...
-
-		// else {
-		// System.err.println("illegal character at position "+pos);
-		// pos++;
-		// return next();
-		// }
+		// TODO Are these symbols supposed to be keywords?
+		else if ("=".contains(c)) {
+			token = new Token(c, c);
+			pos++;
+		} else if (";".contains(c)) {
+			token = new Token(c, c);
+			pos++;
+		}
+		else {
+			System.err.println("illegal character at position " + pos);
+			pos++;
+			return next();
+		}
 
 		return true;
 	}
@@ -92,6 +106,14 @@ public class Scanner {
 		many(letters);
 		String lexeme = program.substring(old, pos);
 		token = new Token((keywords.contains(lexeme) ? lexeme : "id"), lexeme);
+	}
+
+	private void nextKwNum() {
+		int old = pos;
+		many(numbers);
+		String lexeme = program.substring(old, pos);
+		// Most numbers are not keywords in a language.
+		token = new Token((keywords.contains(lexeme) ? lexeme : "num"), lexeme);
 	}
 
 	// This method scans the next lexeme,
