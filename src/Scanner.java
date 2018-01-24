@@ -14,6 +14,7 @@ public class Scanner {
 	private Set<String> letters = new HashSet<String>();
 	private Set<String> keywords = new HashSet<String>();
 	private Set<String> numbers = new HashSet<String>();
+	private Set<String> operators = new HashSet<String>();
 
 	// constructor:
 	// - squirrel-away source program
@@ -26,6 +27,7 @@ public class Scanner {
 		initLetters(letters);
 		initKeywords(keywords);
 		initNumbers(numbers);
+		initOperators(operators);
 	}
 
 	private void initKeywords(Set<String> keywords2) {
@@ -51,6 +53,11 @@ public class Scanner {
 
 	private void initNumbers(Set<String> s) {
 		fill(s, '0', '9');
+	}
+
+	private void initOperators(Set<String> s) {
+		s.add(";");
+		s.add("=");
 	}
 
 	// handy string-processing methods
@@ -83,16 +90,10 @@ public class Scanner {
 			nextKwID();
 		} else if (numbers.contains(c)) {
 			nextKwNum();
-		}
-		// TODO Are these symbols supposed to be keywords?
-		else if ("=".contains(c)) {
+		} else if (operators.contains(c)) {
 			token = new Token(c, c);
 			pos++;
-		} else if (";".contains(c)) {
-			token = new Token(c, c);
-			pos++;
-		}
-		else {
+		} else {
 			System.err.println("illegal character at position " + pos);
 			pos++;
 			return next();
