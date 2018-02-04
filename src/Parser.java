@@ -23,10 +23,18 @@ public class Parser {
 
 	}
 
-	private NodeBlock parseBlock() {
-
-		// return some kind of NodeBlock
-		return null;
+	private NodeBlock parseBlock() throws SyntaxException {
+		NodeStmt stmt = parseStmt();
+		match(";");
+		NodeBlock block = parseBlock();
+		
+		return new NodeBlock(stmt, block);
+	}
+	
+	private NodeStmt parseStmt() throws SyntaxException {
+		NodeAssn assn = parseAssn();
+		
+		return new NodeStmt(assn);
 	}
 
 	private NodeAssn parseAssn() throws SyntaxException {
