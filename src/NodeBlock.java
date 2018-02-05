@@ -8,4 +8,8 @@ public class NodeBlock extends Node {
 		this.stmt = stmt;
 		this.block = block;
 	}
+	
+	public NodeBlock(NodeStmt stmt) {
+		this.stmt = stmt;
+	}
 }

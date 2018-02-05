@@ -24,11 +24,22 @@ public class Parser {
 	}
 
 	private NodeBlock parseBlock() throws SyntaxException {
+		NodeStmt stmt;
+		NodeBlock block;
+		if(scanner.curr().tok().equals(";")){
+			stmt = parseStmt();
+			match(";");
+			block = parseBlock();
+			return new NodeBlock(stmt, block);
+		} else {
+			stmt = parseStmt();
+			return new NodeBlock(stmt);
+		}
+		/*
 		NodeStmt stmt = parseStmt();
-		match(";");
-		NodeBlock block = parseBlock();
+		return new NodeBlock(stmt);
+		*/
 		
-		return new NodeBlock(stmt, block);
 	}
 	
 	private NodeStmt parseStmt() throws SyntaxException {
