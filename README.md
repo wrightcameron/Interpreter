@@ -5,7 +5,7 @@
 
 ## Overview
 
-Scanner for interpreter, takes in strings and tokenizes the letters, numbers, etc.
+Parser for the interpreter, takes in strings and gives the parse tree.
 
 ##Manifest
 
@@ -15,31 +15,44 @@ Scanner for interpreter, takes in strings and tokenizes the letters, numbers, et
 |Scanner.java   |Scanner for interpreter                                            |
 |Token.java     |Class for token object used in scanner                             |
 |SyntaxException.java |Exception for syntax errors                                  |
+|Interpreter.java| driver class 													|
+|NodeAssn.java| Node assign															|
+|NodeBlock.java| Node block Class 													|
+|Node.java| Node Super class  														|
+|NodeStmt.java| Node statement Class 												|
+|Parser.java| Parser class that takes tokens and creates a parse tree 				|
 
 ## Compiling and Using
 
 In directory containing all the files, run the following command.
 
-$ javac Scanner.java
+$ javac Interpreter.java
 
 After code has compiled with no errors run the next command.
 
-$ java Scanner "x=1; myvar=3"
+$ java Interpreter "program"
+
+example 
+
+$ java Interpreter "x=3"
+$ java Interpreter "x=3; myvar=25; abc=555557"
 
 Results of the program will print on the console.
 
 ## Discussion
 
-Hardest part was reading the code and understanding what was going on, 
-after that the coding itself wasn’t difficult.  The part that made me 
-think the hardest was trying to determine how to handle “=” and “;”, both 
-don’t have a set they are a part of like numbers or letters and the write
-up did not say where it wanted them.  I did handle them at first by using 
-an else if, one for each.  After that I wanted to simplify the code and allow 
-expansion so I put both in a set called operators that might change or be 
-modified in the future.
+Adding the parser and the node blocks was not terribly difficult.  
+Once I understood what the node class was and how I was going to 
+make a bunch of sub node blocks it was easy to follow along.  
+The next project i3 will be harder I can tell as it involves 
+adding the rest of the grammar to this program.
 
 ## Testing
 
-Testing was done by running the string input "x=1; myvar=3" and matching the given output 
-on Trello.
+Testing was giving the program different strings and seeing if
+ grammatically correct strings would pass and those wrong 
+ would fail.  Of course, "x=3" and “myvar=25; abc=555557” did 
+ pass but I also tried other types of strings.  In the future 
+ though and with i3 it would be good idea to automate the 
+ testing, and a testing framework with i3 will be given for 
+ integration testing.
