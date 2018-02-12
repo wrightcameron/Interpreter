@@ -7,4 +7,8 @@ public class NodeStmt extends Node {
 		this.assn = assn;
 	}
 
+	public int eval(Environment env) throws EvalException {
+		// TODO Do this.
+		return 0;
+	}
 }
