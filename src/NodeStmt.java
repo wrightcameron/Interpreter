@@ -1,14 +1,14 @@
-
 public class NodeStmt extends Node {
 
-	public NodeAssn assn;
+	private NodeAssn assn;
 
 	public NodeStmt(NodeAssn assn) {
 		this.assn = assn;
 	}
-
+	
+	@Override
 	public int eval(Environment env) throws EvalException {
-		// TODO Do this.
-		return 0;
+		return this.assn.eval(env);
 	}
+
 }

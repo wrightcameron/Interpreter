@@ -1,15 +1,16 @@
-public class NodeAssn extends Node {
+public class NodeAssn extends Node 
+{
 
-	private String id;
-	private int num;
-
-	public NodeAssn(String id, int num) {
-		this.id = id;
-		this.num = num;
-	}
-
-	public int eval(Environment env) throws EvalException {
-		return env.put(id, num);
-	}
+    private String id;
+    private NodeExpr expr;
+	
+    public NodeAssn(String id, NodeExpr expr) {
+    	this.id=id;
+    	this.expr = expr;
+    }
+	
+    public int eval(Environment env) throws EvalException {
+    	return env.put(id,expr.eval(env));
+    }
 
 }

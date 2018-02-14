@@ -23,17 +23,17 @@ public class Parser {
 	}
 
 	private NodeBlock parseBlock() throws SyntaxException {
-		NodeStmt stmt;
-		NodeBlock block;
-		stmt = parseStmt();
-		if (scanner.curr().tok().equals(";")) {
-			match(";");
-			block = parseBlock();
-			return new NodeBlock(stmt, block);
-		}
-		// NodeStmt stmt = parseStmt();
-		return new NodeBlock(stmt);
+		NodeStmt stmt = parseStmt();
 
+		Token t = scanner.curr();
+
+		NodeBlock block = null;
+		if (";".equals(t.lex())) {
+			match(";"); // consume the semicolon and move onto the next token
+			block = parseBlock();
+		}
+
+		return new NodeBlock(stmt, block);
 	}
 
 	private NodeStmt parseStmt() throws SyntaxException {
@@ -42,11 +42,16 @@ public class Parser {
 	}
 
 	private NodeAssn parseAssn() throws SyntaxException {
+		
 		Token id = scanner.curr();
+		
 		match("id");
 		match("=");
+		
 		Token num = scanner.curr();
+		
 		match("num");
+		
 		return new NodeAssn(id.lex(), Integer.parseInt(num.lex()));
 	}
 
