@@ -9,8 +9,10 @@ public class NodeAssn extends Node
     	this.expr = expr;
     }
 	
+	@Override
     public int eval(Environment env) throws EvalException {
     	return env.put(id,expr.eval(env));
+    	//TODO Or print
     }
 
 }

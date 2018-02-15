@@ -32,7 +32,7 @@ public class Scanner {
     }
     
     private void initKeywords(Set<String> keywords2) {
-
+    	keywords2.add("wr");
 	}
 
 	private void initLetters(Set<String> s) {

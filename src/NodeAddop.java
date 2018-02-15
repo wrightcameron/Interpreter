@@ -18,9 +18,9 @@ public class NodeAddop extends Node {
 	throw new EvalException(pos,"bogus addop: "+addop);
     }
     
+	@Override
     public int eval(Environment env) throws EvalException {
-    	// TODO Do this.
-    	return 0;
+		throw new EvalException(pos,"cannot eval() node!");
     }
 
 }

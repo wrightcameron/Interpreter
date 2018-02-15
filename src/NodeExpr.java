@@ -1,18 +1,25 @@
-
 public class NodeExpr extends Node {
-
-	public NodeExpr(NodeTerm term, Object object, Object object2) {
-		// TODO Auto-generated constructor stub
-	}
-
-	public void append(NodeExpr nodeExpr) {
-		// TODO Auto-generated method stub
-		
-	}
 	
+	private NodeTerm term;
+	private NodeAddop addop;
+	private NodeExpr subexpr;
+	
+	public NodeExpr(NodeTerm term, NodeAddop addop, NodeExpr subexpr) {
+		this.term = term;
+		this.addop = addop;
+		this.subexpr = subexpr;
+	}
+
+	@Override
 	public int eval(Environment env) throws EvalException {
-		// TODO Do this.
-		return 0;
+		int r = this.term.eval(env);
+		
+		if (addop != null) {
+			r = (int) this.addop.op(r, this.subexpr.eval(env));
+			//r = this.block.eval(env);
+		}
+		
+		return r;
 	}
 
 }
