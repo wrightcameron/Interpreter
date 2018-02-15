@@ -1,9 +1,9 @@
 
 public class NodeTerm extends Node {
 
-	private NodeFact fact;
-	private NodeMulop mulop;
-	private NodeTerm subterm;
+	protected NodeFact fact;
+	protected NodeMulop mulop;
+	protected NodeTerm subterm;
 	
 	public NodeTerm(NodeFact fact, NodeMulop mulop, NodeTerm subterm) {
 		this.fact = fact;

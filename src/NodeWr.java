@@ -1,7 +1,7 @@
 
 public class NodeWr extends Node{
 
-	private NodeExpr expr;
+	protected NodeExpr expr;
 	
 	public NodeWr(NodeExpr expr) {
 		this.expr = expr;

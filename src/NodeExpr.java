@@ -1,8 +1,8 @@
 public class NodeExpr extends Node {
 	
-	private NodeTerm term;
-	private NodeAddop addop;
-	private NodeExpr subexpr;
+	protected NodeTerm term;
+	protected NodeAddop addop;
+	protected NodeExpr subexpr;
 	
 	public NodeExpr(NodeTerm term, NodeAddop addop, NodeExpr subexpr) {
 		this.term = term;

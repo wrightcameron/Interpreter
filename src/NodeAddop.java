@@ -3,7 +3,7 @@
 
 public class NodeAddop extends Node {
 
-    private String addop;
+	protected String addop;
 
     public NodeAddop(int pos, String addop) {
 	this.pos=pos;

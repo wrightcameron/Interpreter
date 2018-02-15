@@ -1,6 +1,6 @@
 public class NodeMulop extends Node {
 
-    private String mulop;
+	protected String mulop;
 
     public NodeMulop(int pos, String mulop) {
 	this.pos=pos;

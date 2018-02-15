@@ -1,10 +1,10 @@
 public class NodeFact extends Node {
 
-	private Token id;
-	private String num;
-	private NodeExpr expr;
+	protected String id;
+	protected String num;
+	protected NodeExpr expr;
 	
-	public NodeFact(Token id,String num,NodeExpr expr) {
+	public NodeFact(String id,String num,NodeExpr expr) {
 		this.id = id;
 		this.num = num;
 		this.expr = expr;
@@ -12,9 +12,9 @@ public class NodeFact extends Node {
 
 	@Override
 	public int eval(Environment env) throws EvalException {
-		int r;
+		int r = -1;
 		if(id != null){
-			r = env.get(, id);
+			r = env.get(pos, id);
 		}else if(num != null){
 			r = Integer.parseInt(num);
 			

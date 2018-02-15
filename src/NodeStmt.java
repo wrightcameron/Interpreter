@@ -1,7 +1,7 @@
 public class NodeStmt extends Node {
 
-	private NodeAssn assn;
-	private NodeWr wr;
+	protected NodeAssn assn;
+	protected NodeWr wr;
 
 	public NodeStmt(NodeAssn assn,NodeWr wr) {
 		this.assn = assn;
@@ -10,7 +10,13 @@ public class NodeStmt extends Node {
 
 	@Override
 	public int eval(Environment env) throws EvalException {
-		return this.assn.eval(env);
+		
+		if(assn != null){
+			return this.assn.eval(env);
+		}else if(wr != null){
+			return this.wr.eval(env);
+		}
+		return -1;
 	}
 
 }
