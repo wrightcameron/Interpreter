@@ -38,7 +38,7 @@ public class Parser {
 
 	private NodeStmt parseStmt() throws SyntaxException {
 		Token t = scanner.curr();
-		NodeAssn assn = null;;
+		NodeAssn assn = null;
 		NodeWr wr = null;
 		if ("wr".equals(t.tok())) {
 			wr = parseWr();
