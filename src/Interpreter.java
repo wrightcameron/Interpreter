@@ -11,20 +11,10 @@ public class Interpreter {
 		Parser parser = new Parser();
 		Environment env = new Environment();
 
-		//Test script wanted this.
-		for (String stmt : args) {
-			try {
-				System.out.println(parser.parse(stmt).toString());
-
-			} catch (SyntaxException e) {
-				e.printStackTrace();
-				System.err.println(e);
-			}
-		}
-		
 		for (String stmt : args)
 			try {
 				parser.parse(stmt).eval(env);
+				System.out.println(parser.parse(stmt).toString());
 				System.out.println(env.toString());
 
 			} catch (SyntaxException e) {

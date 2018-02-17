@@ -113,8 +113,8 @@ public class Scanner {
     
     private void nextKwSymbol() {
     	int old = pos;
-    	//many(symbols);
-    	pos++;
+    	many(symbols);
+    	//pos++;
     	String lexeme = program.substring(old, pos);
     	token = new Token(lexeme, lexeme);
     }
