@@ -1,24 +1,22 @@
+// (C) 2013 Jim Buffenbarger
+// All rights reserved.
 
 public class NodeTerm extends Node {
 
-	protected NodeFact fact;
-	protected NodeMulop mulop;
-	protected NodeTerm subterm;
-	
-	public NodeTerm(NodeFact fact, NodeMulop mulop, NodeTerm subterm) {
-		this.fact = fact;
-		this.mulop = mulop;
-		this.subterm = subterm;
-	}
+    private NodeFact fact;
+    private NodeMulop mulop;
+    private NodeTerm term;
 
-	@Override 
-	public int eval(Environment env) throws EvalException {
-		int r = this.fact.eval(env);
-		
-		if (mulop != null) {
-			r = (int) this.mulop.op(r, this.subterm.eval(env));
-		}
-		
-		return r;
-	}
+    public NodeTerm(NodeFact fact, NodeMulop mulop, NodeTerm term) {
+	this.fact=fact;
+	this.mulop=mulop;
+	this.term=term;
+    }
+
+    public int eval(Environment env) throws EvalException {
+	return term==null
+	    ? fact.eval(env)
+	    : mulop.op(fact.eval(env),term.eval(env));
+    }
+
 }

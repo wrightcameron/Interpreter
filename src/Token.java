@@ -1,6 +1,5 @@
-// This class models a token, which has two parts:
-// 1) the token itself (e.g., "id" or "+")
-// 2) the token's lexeme (e.g., "foo")
+// (C) 2013 Jim Buffenbarger
+// All rights reserved.
 
 public class Token {
 

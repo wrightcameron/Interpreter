@@ -1,22 +1,21 @@
+// (C) 2013 Jim Buffenbarger
+// All rights reserved.
+
 public class NodeMulop extends Node {
 
-	protected String mulop;
+    private String mulop;
 
     public NodeMulop(int pos, String mulop) {
 	this.pos=pos;
 	this.mulop=mulop;
     }
 
-    public double op(double o1, double o2) throws EvalException {
+    public int op(int o1, int o2) throws EvalException {
 	if (mulop.equals("*"))
 	    return o1*o2;
 	if (mulop.equals("/"))
 	    return o1/o2;
-	throw new EvalException(pos,"bogus addop: "+mulop);
+	throw new EvalException(pos,"bogus mulop: "+mulop);
     }
-    
-	@Override
-    public int eval(Environment env) throws EvalException {
-		throw new EvalException(pos,"cannot eval() node!");
-    }
+
 }

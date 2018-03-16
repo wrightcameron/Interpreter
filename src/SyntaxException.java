@@ -1,3 +1,6 @@
+// (C) 2013 Jim Buffenbarger
+// All rights reserved.
+
 public class SyntaxException extends Exception {
 
     private int pos;
@@ -18,3 +21,4 @@ public class SyntaxException extends Exception {
     }
 
 }
+

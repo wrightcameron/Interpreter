@@ -1,27 +1,25 @@
-import java.util.HashMap;
+// (C) 2013 Jim Buffenbarger
+// All rights reserved.
 
-// This class provides a stubbed-out environment.
-// You are expected to implement the methods.
-// Accessing an undefined variable should throw an exception.
+import java.util.*;
 
 public class Environment {
-	private HashMap<String, Integer> symbolTable;
 
-	public Environment(){
-		symbolTable = new HashMap<String, Integer>();
-	}
-	
-    public int put(String var, int val) { 
-    	symbolTable.put(var, val);
-      	return 0;
+    private Map<String,Integer> map;
+
+    public Environment() {
+	map=new HashMap<String,Integer>();
     }
-    //TODO What the hell does pos do?
-    public int get(int pos, String var) throws EvalException { 
-    	Integer val = symbolTable.get(var);
-    	if(val == null){
-    		throw new EvalException(pos,"Variable does not exist.");
-    	}
-    	return val;
+
+    public int put(String var, int val) {
+	map.put(var,val);
+	return val;
     }
-    
+
+    public int get(int pos, String var) throws EvalException {
+	if (map.containsKey(var))
+	    return map.get(var);
+	throw new EvalException(pos,"undefined variable: "+var);
+    }
+
 }

@@ -1,8 +1,7 @@
 import java.lang.reflect.Field;
 
-// This class, and its subclasses,
-// collectively model parse-tree nodes.
-// Each kind of node can be eval()-uated.
+// (C) 2013 Jim Buffenbarger
+// All rights reserved.
 
 public abstract class Node {
 
@@ -11,7 +10,6 @@ public abstract class Node {
     public int eval(Environment env) throws EvalException {
 	throw new EvalException(pos,"cannot eval() node!");
     }
-    
     
     public String toString() {
   	  StringBuilder result = new StringBuilder();

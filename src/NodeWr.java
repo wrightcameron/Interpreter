@@ -1,16 +1,18 @@
+// (C) 2013 Jim Buffenbarger
+// All rights reserved.
 
-public class NodeWr extends Node{
+public class NodeWr extends Node {
 
-	protected NodeExpr expr;
-	
-	public NodeWr(NodeExpr expr) {
-		this.expr = expr;
-	}
+    private NodeExpr expr;
 
-	@Override
-	public int eval(Environment env) throws EvalException {
-		int r = this.expr.eval(env);
-		System.out.println(r);
-		return 0;
-	}
+    public NodeWr(NodeExpr expr) {
+	this.expr=expr;
+    }
+
+    public int eval(Environment env) throws EvalException {
+	int val=expr.eval(env);
+	System.out.println(val);
+	return val;
+    }
+
 }

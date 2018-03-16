@@ -1,18 +1,16 @@
 // (C) 2013 Jim Buffenbarger
 // All rights reserved.
 
-public class NodeAssn extends Node {
+public class NodeFactExpr extends NodeFact {
 
-    private String id;
     private NodeExpr expr;
 
-    public NodeAssn(String id, NodeExpr expr) {
-	this.id=id;
+    public NodeFactExpr(NodeExpr expr) {
 	this.expr=expr;
     }
 
     public int eval(Environment env) throws EvalException {
-	return env.put(id,expr.eval(env));
+	return expr.eval(env);
     }
 
 }

@@ -1,25 +1,23 @@
-public class NodeExpr extends Node {
-	
-	protected NodeTerm term;
-	protected NodeAddop addop;
-	protected NodeExpr subexpr;
-	
-	public NodeExpr(NodeTerm term, NodeAddop addop, NodeExpr subexpr) {
-		this.term = term;
-		this.addop = addop;
-		this.subexpr = subexpr;
-	}
+// (C) 2013 Jim Buffenbarger
+// All rights reserved.
 
-	@Override
-	public int eval(Environment env) throws EvalException {
-		int r = this.term.eval(env);
-		
-		if (addop != null) {
-			r = (int) this.addop.op(r, this.subexpr.eval(env));
-			//r = this.block.eval(env);
-		}
-		
-		return r;
-	}
+public class NodeExpr extends Node {
+
+    private NodeTerm term;
+    private NodeAddop addop;
+    private NodeExpr expr;
+
+    public NodeExpr(NodeTerm term, NodeAddop addop, NodeExpr expr) {
+	this.term=term;
+	this.addop=addop;
+	this.expr=expr;
+    }
+
+
+    public int eval(Environment env) throws EvalException {
+	return expr==null
+	    ? term.eval(env)
+	    : addop.op(term.eval(env),expr.eval(env));
+    }
 
 }

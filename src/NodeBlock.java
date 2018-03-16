@@ -1,7 +1,7 @@
 public class NodeBlock extends Node {
 
-	protected NodeStmt stmt;
-	protected NodeBlock block;
+	private NodeStmt stmt;
+	private NodeBlock block;
 
 	public NodeBlock(NodeStmt stmt, NodeBlock block) {
 		this.stmt = stmt;
