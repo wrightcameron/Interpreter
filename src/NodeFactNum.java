@@ -3,14 +3,14 @@
 
 public class NodeFactNum extends NodeFact {
 
-    private String num;
+	private String num;
 
-    public NodeFactNum(String num) {
-	this.num=num;
-    }
+	public NodeFactNum(String num) {
+		this.num = num;
+	}
 
-    public int eval(Environment env) throws EvalException {
-	return Integer.parseInt(num);
-    }
+	public double eval(Environment env) throws EvalException {
+		return Integer.parseInt(num);
+	}
 
 }

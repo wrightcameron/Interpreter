@@ -3,21 +3,18 @@
 
 public class NodeExpr extends Node {
 
-    private NodeTerm term;
-    private NodeAddop addop;
-    private NodeExpr expr;
+	private NodeTerm term;
+	private NodeAddop addop;
+	private NodeExpr expr;
 
-    public NodeExpr(NodeTerm term, NodeAddop addop, NodeExpr expr) {
-	this.term=term;
-	this.addop=addop;
-	this.expr=expr;
-    }
+	public NodeExpr(NodeTerm term, NodeAddop addop, NodeExpr expr) {
+		this.term = term;
+		this.addop = addop;
+		this.expr = expr;
+	}
 
-
-    public int eval(Environment env) throws EvalException {
-	return expr==null
-	    ? term.eval(env)
-	    : addop.op(term.eval(env),expr.eval(env));
-    }
+	public double eval(Environment env) throws EvalException {
+		return expr == null ? term.eval(env) : addop.op(term.eval(env), expr.eval(env));
+	}
 
 }

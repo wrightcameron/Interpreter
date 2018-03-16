@@ -3,14 +3,14 @@
 
 public class NodeFactFact extends NodeFact {
 
-    private NodeFact fact;
+	private NodeFact fact;
 
-    public NodeFactFact(NodeFact fact) {
-	this.fact=fact;
-    }
+	public NodeFactFact(NodeFact fact) {
+		this.fact = fact;
+	}
 
-    public int eval(Environment env) throws EvalException {
-	return fact.eval(env);
-    }
+	public double eval(Environment env) throws EvalException {
+		return fact.eval(env);
+	}
 
 }

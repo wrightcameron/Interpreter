@@ -3,16 +3,16 @@
 
 public class NodeWr extends Node {
 
-    private NodeExpr expr;
+	private NodeExpr expr;
 
-    public NodeWr(NodeExpr expr) {
-	this.expr=expr;
-    }
+	public NodeWr(NodeExpr expr) {
+		this.expr = expr;
+	}
 
-    public int eval(Environment env) throws EvalException {
-	int val=expr.eval(env);
-	System.out.println(val);
-	return val;
-    }
+	public double eval(Environment env) throws EvalException {
+		double val = expr.eval(env);
+		System.out.println(val);
+		return val;
+	}
 
 }

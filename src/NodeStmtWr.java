@@ -3,14 +3,14 @@
 
 public class NodeStmtWr extends NodeStmt {
 
-    private NodeWr wr;
+	private NodeWr wr;
 
-    public NodeStmtWr(NodeWr wr) {
-	this.wr=wr;
-    }
+	public NodeStmtWr(NodeWr wr) {
+		this.wr = wr;
+	}
 
-    public int eval(Environment env) throws EvalException {
-	return wr.eval(env);
-    }
+	public double eval(Environment env) throws EvalException {
+		return wr.eval(env);
+	}
 
 }

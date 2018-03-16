@@ -5,36 +5,37 @@ import java.lang.reflect.Field;
 
 public abstract class Node {
 
-    protected int pos=0;
+	protected int pos = 0;
 
-    public int eval(Environment env) throws EvalException {
-	throw new EvalException(pos,"cannot eval() node!");
-    }
-    
-    public String toString() {
-  	  StringBuilder result = new StringBuilder();
+	public double eval(Environment env) throws EvalException {
+		throw new EvalException(pos, "cannot eval() node!");
+	}
 
-  	  result.append( this.getClass().getName() );
-  	  result.append( " ( " );
+	public String toString() {
+		StringBuilder result = new StringBuilder();
 
-  	  //determine fields declared in this class only (no fields of superclass)
-  	  Field[] fields = this.getClass().getDeclaredFields();
+		result.append(this.getClass().getName());
+		result.append(" ( ");
 
-  	  //print field names paired with their values
-  	  for ( Field field : fields  ) {
-  	    result.append("  ");
-  	    try {
-  	      result.append( field.getName() );
-  	      result.append(": ");
-  	      //requires access to private field:
-  	      result.append( field.get(this) );
-  	    } catch ( IllegalAccessException ex ) {
-  	      System.out.println(ex);
-  	    }
-  	  }
-  	  result.append(" ) ");
+		// determine fields declared in this class only (no fields of
+		// superclass)
+		Field[] fields = this.getClass().getDeclaredFields();
 
-  	  return result.toString();
-  	}
+		// print field names paired with their values
+		for (Field field : fields) {
+			result.append("  ");
+			try {
+				result.append(field.getName());
+				result.append(": ");
+				// requires access to private field:
+				result.append(field.get(this));
+			} catch (IllegalAccessException ex) {
+				System.out.println(ex);
+			}
+		}
+		result.append(" ) ");
+
+		return result.toString();
+	}
 
 }

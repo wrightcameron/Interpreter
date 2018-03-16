@@ -1,3 +1,4 @@
+
 // (C) 2013 Jim Buffenbarger
 // All rights reserved.
 
@@ -5,21 +6,21 @@ import java.util.*;
 
 public class Environment {
 
-    private Map<String,Integer> map;
+	private Map<String, Double> map;
 
-    public Environment() {
-	map=new HashMap<String,Integer>();
-    }
+	public Environment() {
+		map = new HashMap<String, Double>();
+	}
 
-    public int put(String var, int val) {
-	map.put(var,val);
-	return val;
-    }
+	public double put(String var, double val) {
+		map.put(var, val);
+		return val;
+	}
 
-    public int get(int pos, String var) throws EvalException {
-	if (map.containsKey(var))
-	    return map.get(var);
-	throw new EvalException(pos,"undefined variable: "+var);
-    }
+	public double get(int pos, String var) throws EvalException {
+		if (map.containsKey(var))
+			return map.get(var);
+		throw new EvalException(pos, "undefined variable: " + var);
+	}
 
 }

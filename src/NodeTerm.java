@@ -3,20 +3,18 @@
 
 public class NodeTerm extends Node {
 
-    private NodeFact fact;
-    private NodeMulop mulop;
-    private NodeTerm term;
+	private NodeFact fact;
+	private NodeMulop mulop;
+	private NodeTerm term;
 
-    public NodeTerm(NodeFact fact, NodeMulop mulop, NodeTerm term) {
-	this.fact=fact;
-	this.mulop=mulop;
-	this.term=term;
-    }
+	public NodeTerm(NodeFact fact, NodeMulop mulop, NodeTerm term) {
+		this.fact = fact;
+		this.mulop = mulop;
+		this.term = term;
+	}
 
-    public int eval(Environment env) throws EvalException {
-	return term==null
-	    ? fact.eval(env)
-	    : mulop.op(fact.eval(env),term.eval(env));
-    }
+	public double eval(Environment env) throws EvalException {
+		return term == null ? fact.eval(env) : mulop.op(fact.eval(env), term.eval(env));
+	}
 
 }

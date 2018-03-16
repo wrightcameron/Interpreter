@@ -3,16 +3,16 @@
 
 public class Interpreter {
 
-    public static void main(String[] args) {
-	Parser parser=new Parser();
-	Environment env=new Environment();
-	for (String prog: args)
-	    try {
-		parser.parse(prog).eval(env);
-	    } catch (SyntaxException e) {
-		System.err.println(e);
-	    } catch (EvalException e) {
-		System.err.println(e);
-	    }
-    }
+	public static void main(String[] args) {
+		Parser parser = new Parser();
+		Environment env = new Environment();
+		for (String prog : args)
+			try {
+				parser.parse(prog).eval(env);
+			} catch (SyntaxException e) {
+				System.err.println(e);
+			} catch (EvalException e) {
+				System.err.println(e);
+			}
+	}
 }
