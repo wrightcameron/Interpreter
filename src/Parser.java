@@ -124,6 +124,12 @@ public class Parser {
 		NodeAssn assn = new NodeAssn(id.lex(), expr);
 		return assn;
 	}
+	
+	private NodeRd parseRd() throws SyntaxException {
+		//TODO Do I need to find the Id, this is a read so it should be from the command line.
+		match("rd");
+		return new NodeRd();
+	}
 
 	private NodeWr parseWr() throws SyntaxException {
 		match("wr");
@@ -145,12 +151,31 @@ public class Parser {
 		return new NodeIf(boolExpr,stmt,elseStmt);
 		
 	}
+	
+	private NodeWhile parseWhile() throws SyntaxException {
+		match("while");
+		NodeBoolExpr boolExpr = parseBoolExpr();
+		match("do");
+		NodeStmt stmt = parseStmt();
+		return new NodeWhile(boolExpr,stmt);
+	}
+	
+	private NodeBegin parseBegin() throws SyntaxException {
+		match("begin");
+		NodeBlock nodeBlock = parseBlock();
+		match("end");
+		return new NodeBegin(nodeBlock);
+	}
 
 	private NodeStmt parseStmt() throws SyntaxException {
 
 		if (curr().equals(new Token("id"))) {
 			NodeAssn assn = parseAssn();
 			return new NodeStmtAssn(assn);
+		}
+		if (curr().equals(new Token("rd"))) {
+			NodeRd rd = parseRd();
+			return new NodeStmtRd(rd);
 		}
 		if (curr().equals(new Token("wr"))) {
 			NodeWr wr = parseWr();
@@ -182,11 +207,16 @@ public class Parser {
 		return block;
 
 	}
+	
+	private NodeProg parseProg() throws SyntaxException {
+		NodeBlock block = parseBlock();
+		return new NodeProg(block);
+	}
 
 	public Node parse(String program) throws SyntaxException {
 		scanner = new Scanner(program);
 		scanner.next();
-		return parseBlock();
+		return parseProg();
 	}
 
 }
