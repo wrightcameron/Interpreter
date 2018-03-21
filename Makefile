@@ -8,14 +8,14 @@ build:
 
 Interpreter.sh:
 	echo -ne '#!/bin/bash\n' > $@
-	echo -ne 'cd target/classes' >> $@
-	echo -ne 'java interpreter/Interpreter "$$*"' >> $@
+	echo -ne 'cd target/classes\n' >> $@
+	echo -ne 'java interpreter/Interpreter "$$*"\n' >> $@
 	chmod 754 $@
 
 Scanner.sh:
 	echo -ne '#!/bin/bash\n' > $@
-	echo -ne 'cd target/classes' >> $@
-	echo -ne 'java interpreter/Scanner "$$*"' >> $@
+	echo -ne 'cd target/classes\n' >> $@
+	echo -ne 'java interpreter/Scanner "$$*"\n' >> $@
 	chmod 754 $@
 
 
