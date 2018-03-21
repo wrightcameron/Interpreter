@@ -1,4 +1,6 @@
 
+
+
 public class NodeStmtBegin extends NodeStmt {
 	
 	private NodeBegin begin;

@@ -1,3 +1,4 @@
+
 // (C) 2013 Jim Buffenbarger
 // All rights reserved.
 
@@ -13,8 +14,17 @@ public class NodeExpr extends Node {
 		this.expr = expr;
 	}
 
+	public void append(NodeExpr expr) {
+		if (this.expr == null) {
+			this.addop = expr.addop;
+			this.expr = expr;
+			expr.addop = null;
+		} else
+			this.expr.append(expr);
+	}
+
 	public double eval(Environment env) throws EvalException {
-		return expr == null ? term.eval(env) : addop.op(term.eval(env), expr.eval(env));
+		return expr == null ? term.eval(env) : addop.op(expr.eval(env), term.eval(env));
 	}
 
 }

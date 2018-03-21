@@ -1,0 +1,11 @@
+#!/bin/bash
+
+P() {
+    for f ; do
+	text2pdf -s10 < $f | lpr
+    done
+}
+
+P [A-I]*.java
+P [P-Z]*.java
+P Node*.java

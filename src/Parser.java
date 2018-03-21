@@ -1,6 +1,37 @@
 // (C) 2013 Jim Buffenbarger
 // All rights reserved.
 
+// prog     : block
+// block    : stmt ';' block
+//          | stmt
+// stmt     : assn
+//          | 'rd' id
+//          | 'wr' expr
+//          | 'if' boolexpr 'then' stmt
+//          | 'if' boolexpr 'then' stmt 'else' stmt
+//          | 'while' boolexpr 'do' stmt
+//          | 'begin' block 'end'
+// assn     : id '=' expr
+// expr     : term addop expr
+//          | term
+// term     : fact mulop term
+//          | fact
+// fact     : id 
+//          | num
+//          | '(' expr ')'
+//          | '-' fact
+// boolexpr : expr relop expr
+// addop    : '+'
+//          | '-'
+// mulop    : '*'
+//          | '/'
+// relop    : '<'
+//          | '<='
+//          | '>'
+//          | '>='
+//          | '<>'
+//          | '=='
+
 public class Parser {
 
 	private Scanner scanner;
@@ -103,8 +134,9 @@ public class Parser {
 		NodeMulop mulop = parseMulop();
 		if (mulop == null)
 			return new NodeTerm(fact, null, null);
-		NodeTerm subterm = parseTerm();
-		return new NodeTerm(fact, mulop, subterm);
+		NodeTerm term = parseTerm();
+		term.append(new NodeTerm(fact, mulop, null));
+		return term;
 	}
 
 	private NodeExpr parseExpr() throws SyntaxException {
@@ -112,8 +144,9 @@ public class Parser {
 		NodeAddop addop = parseAddop();
 		if (addop == null)
 			return new NodeExpr(term, null, null);
-		NodeExpr subexpr = parseExpr();
-		return new NodeExpr(term, addop, subexpr);
+		NodeExpr expr = parseExpr();
+		expr.append(new NodeExpr(term, addop, null));
+		return expr;
 	}
 
 	private NodeAssn parseAssn() throws SyntaxException {
@@ -124,11 +157,12 @@ public class Parser {
 		NodeAssn assn = new NodeAssn(id.lex(), expr);
 		return assn;
 	}
-	
+
 	private NodeRd parseRd() throws SyntaxException {
-		//TODO Do I need to find the Id, this is a read so it should be from the command line.
 		match("rd");
-		return new NodeRd();
+		Token id = curr();
+		match("id");
+		return new NodeRd(id.lex());
 	}
 
 	private NodeWr parseWr() throws SyntaxException {
@@ -137,29 +171,29 @@ public class Parser {
 		NodeWr wr = new NodeWr(expr);
 		return wr;
 	}
-	
+
 	private NodeIf parseIf() throws SyntaxException {
 		match("if");
 		NodeBoolExpr boolExpr = parseBoolExpr();
 		match("then");
 		NodeStmt stmt = parseStmt();
 		NodeStmt elseStmt = null;
-		if (curr().equals(new Token("else"))){
+		if (curr().equals(new Token("else"))) {
 			match("else");
-			 elseStmt = parseStmt();
+			elseStmt = parseStmt();
 		}
-		return new NodeIf(boolExpr,stmt,elseStmt);
-		
+		return new NodeIf(boolExpr, stmt, elseStmt);
+
 	}
-	
+
 	private NodeWhile parseWhile() throws SyntaxException {
 		match("while");
 		NodeBoolExpr boolExpr = parseBoolExpr();
 		match("do");
 		NodeStmt stmt = parseStmt();
-		return new NodeWhile(boolExpr,stmt);
+		return new NodeWhile(boolExpr, stmt);
 	}
-	
+
 	private NodeBegin parseBegin() throws SyntaxException {
 		match("begin");
 		NodeBlock nodeBlock = parseBlock();
@@ -205,9 +239,8 @@ public class Parser {
 		}
 		NodeBlock block = new NodeBlock(stmt, rest);
 		return block;
-
 	}
-	
+
 	private NodeProg parseProg() throws SyntaxException {
 		NodeBlock block = parseBlock();
 		return new NodeProg(block);

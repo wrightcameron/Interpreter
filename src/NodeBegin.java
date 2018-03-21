@@ -1,4 +1,6 @@
 
+
+
 public class NodeBegin extends Node{
 
 	private NodeBlock block;

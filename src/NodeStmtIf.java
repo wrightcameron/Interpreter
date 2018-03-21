@@ -1,4 +1,6 @@
 
+
+
 public class NodeStmtIf extends NodeStmt {
 	
 	private NodeIf nif;

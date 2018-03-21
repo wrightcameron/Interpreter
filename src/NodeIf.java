@@ -1,4 +1,5 @@
 
+
 public class NodeIf extends Node {
 
 	private NodeBoolExpr boolExpr;
@@ -12,11 +13,11 @@ public class NodeIf extends Node {
 	}
 
 	public double eval(Environment env) throws EvalException {
-		//What do I return if the logic for the first if statement is false.
 		if (elseStmt == null) {
 			if (checkCondition(env)) {
 				return stmt.eval(env);
 			}
+			return 0;
 		} else {
 			if (checkCondition(env)) {
 				return stmt.eval(env);
@@ -24,7 +25,6 @@ public class NodeIf extends Node {
 				return elseStmt.eval(env);
 			}
 		}
-		return 0;
 	}
 
 	private boolean checkCondition(Environment env) throws EvalException {

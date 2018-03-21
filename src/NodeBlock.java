@@ -1,3 +1,7 @@
+
+// (C) 2013 Jim Buffenbarger
+// All rights reserved.
+
 public class NodeBlock extends Node {
 
 	private NodeStmt stmt;
@@ -8,15 +12,9 @@ public class NodeBlock extends Node {
 		this.block = block;
 	}
 
-	@Override
 	public double eval(Environment env) throws EvalException {
-		double r = this.stmt.eval(env);
-
-		if (block != null) {
-			r = this.block.eval(env);
-		}
-
-		return r;
+		double r = stmt.eval(env);
+		return block == null ? r : block.eval(env);
 	}
 
 }

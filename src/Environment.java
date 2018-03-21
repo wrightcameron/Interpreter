@@ -17,7 +17,7 @@ public class Environment {
 		return val;
 	}
 
-	public double get(int pos, String var) throws EvalException {
+	public Double get(int pos, String var) throws EvalException {
 		if (map.containsKey(var))
 			return map.get(var);
 		throw new EvalException(pos, "undefined variable: " + var);

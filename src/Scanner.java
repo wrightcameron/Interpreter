@@ -15,7 +15,6 @@ public class Scanner {
 	private Set<String> legits = new HashSet<String>();
 	private Set<String> keywords = new HashSet<String>();
 	private Set<String> operators = new HashSet<String>();
-	private Set<String> logicOperators = new HashSet<String>();
 
 	private void fill(Set<String> s, char lo, char hi) {
 		for (char c = lo; c <= hi; c++)
@@ -51,9 +50,7 @@ public class Scanner {
 		s.add("(");
 		s.add(")");
 		s.add(";");
-	}
-	
-	private void initlogicOperators(Set<String> s) {
+		//Logical operators
 		s.add("<");
 		s.add("<=");
 		s.add(">");
@@ -84,7 +81,6 @@ public class Scanner {
 		initLegits(legits);
 		initKeywords(keywords);
 		initOperators(operators);
-		initlogicOperators(logicOperators);
 	}
 
 	public boolean done() {
@@ -135,21 +131,7 @@ public class Scanner {
 		String lexeme = program.substring(old, pos);
 		token = new Token(lexeme);
 	}
-	
-	private void nextLogOp() {
-		int old = pos;
-		pos = old + 2;
-		if (!done()) {
-			String lexeme = program.substring(old, pos);
-			if (operators.contains(lexeme)) {
-				token = new Token(lexeme);
-				return;
-			}
-		}
-		pos = old + 1;
-		String lexeme = program.substring(old, pos);
-		token = new Token(lexeme);
-	}
+
 
 	public boolean next() {
 
@@ -164,8 +146,6 @@ public class Scanner {
 			nextKwId();
 		else if (operators.contains(c))
 			nextOp();
-		else if (operators.contains(c))
-			nextLogOp();
 		else if (c.equals("#")) {
 			pos++;
 			past('\n');
