@@ -1,31 +1,5 @@
 package interpreter;
-import interpreter.node.Node;
-import interpreter.node.NodeAddop;
-import interpreter.node.NodeAssn;
-import interpreter.node.NodeBegin;
-import interpreter.node.NodeBlock;
-import interpreter.node.NodeBoolExpr;
-import interpreter.node.NodeExpr;
-import interpreter.node.NodeFact;
-import interpreter.node.NodeFactExpr;
-import interpreter.node.NodeFactFact;
-import interpreter.node.NodeFactId;
-import interpreter.node.NodeFactNum;
-import interpreter.node.NodeIf;
-import interpreter.node.NodeMulop;
-import interpreter.node.NodeProg;
-import interpreter.node.NodeRd;
-import interpreter.node.NodeRelop;
-import interpreter.node.NodeStmt;
-import interpreter.node.NodeStmtAssn;
-import interpreter.node.NodeStmtBegin;
-import interpreter.node.NodeStmtIf;
-import interpreter.node.NodeStmtRd;
-import interpreter.node.NodeStmtWhile;
-import interpreter.node.NodeStmtWr;
-import interpreter.node.NodeTerm;
-import interpreter.node.NodeWhile;
-import interpreter.node.NodeWr;
+import interpreter.node.*;
 
 // (C) 2013 Jim Buffenbarger
 // All rights reserved.
@@ -34,6 +8,7 @@ import interpreter.node.NodeWr;
 // block    : stmt ';' block
 //          | stmt
 // stmt     : assn
+// 			| 'def' id '(' id ')' '=' expr
 //          | 'rd' id
 //          | 'wr' expr
 //          | 'if' boolexpr 'then' stmt
@@ -45,7 +20,8 @@ import interpreter.node.NodeWr;
 //          | term
 // term     : fact mulop term
 //          | fact
-// fact     : id 
+// fact     : id
+// 			| id '(' expr ')'
 //          | num
 //          | '(' expr ')'
 //          | '-' fact
@@ -151,6 +127,13 @@ public class Parser {
 		if (curr().equals(new Token("id"))) {
 			Token id = curr();
 			match("id");
+			//function call
+			if(curr().equals(new Token("("))){
+				match("(");
+				NodeExpr expr = parseExpr();
+				match(")");
+				return new NodeFactFuncCall(pos(), id.lex(),expr);
+			}
 			return new NodeFactId(pos(), id.lex());
 		}
 		Token num = curr();
@@ -230,6 +213,19 @@ public class Parser {
 		return new NodeBegin(nodeBlock);
 	}
 
+	private NodeFuncDecl parseFuncDecl() throws SyntaxException {
+		match("def");
+		Token funcId = curr();
+		match("id");
+		match("(");
+		Token arguId = curr();
+		match("id");
+		match(")");
+		match("=");
+		NodeExpr expr = parseExpr();
+		return new NodeFuncDecl(funcId.lex(),arguId.lex(),expr);
+	}
+
 	private NodeStmt parseStmt() throws SyntaxException {
 
 		if (curr().equals(new Token("id"))) {
@@ -255,6 +251,10 @@ public class Parser {
 		if (curr().equals(new Token("begin"))) {
 			NodeBegin begin = parseBegin();
 			return new NodeStmtBegin(begin);
+		}
+		if (curr().equals(new Token("def"))) {
+			NodeFuncDecl funcDecl = parseFuncDecl();
+			return new NodeStmtFuncDecl(funcDecl);
 		}
 		return null;
 	}

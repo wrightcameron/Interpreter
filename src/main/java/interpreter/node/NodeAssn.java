@@ -16,7 +16,7 @@ public class NodeAssn extends Node {
     }
 
     public double eval(Environment env) throws EvalException {
-	return env.put(id,expr.eval(env));
+	    return env.put(id,expr.eval(env));
     }
 
 }
