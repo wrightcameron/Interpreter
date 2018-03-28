@@ -1,6 +1,4 @@
-package interpreter.node;
-import interpreter.Environment;
-import interpreter.EvalException;
+package interpreter;
 
 public class NodeProg extends Node{
 

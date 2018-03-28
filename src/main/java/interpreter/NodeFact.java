@@ -1,4 +1,4 @@
-package interpreter.node;
+package interpreter;
 
 
 public abstract class NodeFact extends Node {}

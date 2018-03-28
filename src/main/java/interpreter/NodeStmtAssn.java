@@ -1,6 +1,4 @@
-package interpreter.node;
-import interpreter.Environment;
-import interpreter.EvalException;
+package interpreter;
 
 // (C) 2013 Jim Buffenbarger
 // All rights reserved.

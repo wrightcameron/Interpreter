@@ -1,4 +1,4 @@
-package interpreter.node;
+package interpreter;
 import interpreter.Environment;
 import interpreter.EvalException;
 

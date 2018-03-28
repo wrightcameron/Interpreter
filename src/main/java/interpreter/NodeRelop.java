@@ -1,5 +1,4 @@
-package interpreter.node;
-import interpreter.EvalException;
+package interpreter;
 
 public class NodeRelop extends Node {
 	private String relop;
