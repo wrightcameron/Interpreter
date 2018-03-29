@@ -1,2 +1,0 @@
-NodeBlock (   stmt: NodeStmt (   assn: NodeAssn (   id: x  expr: NodeExpr (   term: NodeTerm (   fact: NodeFact (   id: null  num: 3  expr: null )   mulop: null  subterm: null )   addop: null  subexpr: null )  )   wr: null )   block: null ) 
-Environment@33909752

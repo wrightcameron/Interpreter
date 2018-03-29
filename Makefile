@@ -4,23 +4,25 @@ PROGS=build Interpreter.sh Scanner.sh
 all:$(PROGS)
 
 build:
-	mvn compile
+	javac ./src/*.java
+	mkdir bin
+	mv ./src/*.class ./bin
 
 Interpreter.sh:
-	echo -ne '#!/bin/bash\n' > $@
-	echo -ne 'cd target/classes\n' >> $@
-	echo -ne 'java interpreter/Interpreter "$$*"\n' >> $@
+	echo '#!/bin/bash\n' > $@
+	echo 'cd bin\n' >> $@
+	echo 'java Interpreter "$$*"\n' >> $@
 	chmod 754 $@
 
 Scanner.sh:
-	echo -ne '#!/bin/bash\n' > $@
-	echo -ne 'cd target/classes\n' >> $@
-	echo -ne 'java interpreter/Scanner "$$*"\n' >> $@
+	echo '#!/bin/bash\n' > $@
+	echo 'cd bin\n' >> $@
+	echo 'java Scanner "$$*"\n' >> $@
 	chmod 754 $@
 
 
 
 clean:
-	mvn clean
+	rm -rf bin
 	rm -f Scanner.sh
 	rm -f Interpreter.sh
