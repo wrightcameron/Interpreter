@@ -4,9 +4,9 @@
 public class Interpreter {
 
 	public static void main(String[] args) {
-		Parser parser = new Parser();
-		Environment env = new Environment();
-		for (String prog : args)
+		Parser parser=new Parser();
+		Environment env=new Environment();
+		for (String prog: args)
 			try {
 				parser.parse(prog).eval(env);
 			} catch (SyntaxException e) {
@@ -15,4 +15,5 @@ public class Interpreter {
 				System.err.println(e);
 			}
 	}
+
 }

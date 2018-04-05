@@ -7,12 +7,14 @@ public class EvalException extends Exception {
 	private String msg;
 
 	public EvalException(int pos, String msg) {
-		this.pos = pos;
-		this.msg = msg;
+		this.pos=pos;
+		this.msg=msg;
 	}
 
 	public String toString() {
-		return "eval error" + ", pos=" + pos + ", " + msg;
+		return "eval error"
+				+", pos="+pos
+				+", "+msg;
 	}
 
 }

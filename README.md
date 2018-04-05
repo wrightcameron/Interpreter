@@ -1,4 +1,4 @@
-# i4 Scanner 
+# i5 Functions
 
 * Author: Cameron Wright
 * Class: CS354
@@ -9,7 +9,7 @@ Parser for the interpreter, takes in strings and gives the parse tree.
 
 ## Compiling and Using
 
-The Interpreter is now built with maven and using a Makefile. In the
+The Interpreter is now built using a Makefile. In the
 root project directory run the following command.
 
 $ make
@@ -36,14 +36,13 @@ Results of the program for both will print on the console.
 
 ## Discussion
 
-i4 was not terrible.  i3 and the code provided for this 
-project helped set up how the code and formatting would 
-look.  This project was all about building upon the last 
-project and using the old project as a template it was 
-easy to build up the context free grammar.  The eval 
-function in this assignment did get more complex and 
-having to insert an if statement or a while loop required 
-a little more thinking and logic, but nothing to hard.
+i5 took alot more thought that I thought it was going to take.
+Adding the new function classes and handling the functions in the
+parser was easy and followed the same steps that the previous
+project did.  The difficulty started when I found out that I did
+not know how I was going to add the arguments to the function 
+when I could call it.  Took some more thinking and making new
+classes and afterwards I was able to get this code to work.
 
 ## Testing
 

@@ -5,12 +5,18 @@ import java.util.*;
 
 public class Environment {
 
-    private Map<String, Double> valMap;
-    private Map<String, NodeExpr> funcMap;
+    private HashMap<String, Double> valMap;
+    private HashMap<String, Function> funcMap;
 
     public Environment() {
         valMap = new HashMap<String, Double>();
-        funcMap = new HashMap<String, NodeExpr>();
+        funcMap = new HashMap<String, Function>();
+    }
+
+    protected Environment(HashMap<String, Double> valMap,HashMap<String, Function> funcMap) {
+        //Use copy constructs
+        this.valMap = new HashMap<String, Double>(valMap);
+        this.funcMap = new HashMap<String, Function>(funcMap);
     }
 
     public double put(String var, double val) {
@@ -24,15 +30,20 @@ public class Environment {
         throw new EvalException(pos, "undefined variable: " + var);
     }
 
-    public NodeExpr put(String func, NodeExpr expr) {
+    //For functions
+    public double decl(String func, Function expr) {
         funcMap.put(func, expr);
-        return expr;
+        return 0;
     }
 
-    public NodeExpr call(int pos, String func) throws EvalException {
+    public Function call(int pos, String func) throws EvalException {
         if (funcMap.containsKey(func))
             return funcMap.get(func);
-        throw new EvalException(pos, "undefined variable: " + func);
+        throw new EvalException(pos, "undefined function: " + func);
+    }
+
+    public Environment copyEnv(){
+        return new Environment(valMap, funcMap);
     }
 
 }

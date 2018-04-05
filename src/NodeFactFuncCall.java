@@ -1,16 +1,13 @@
+public class NodeFactFuncCall extends NodeFact {
 
-public class NodeFactFuncCall extends NodeFact{
+    private FuncCall func;
 
-    private String id;
-    private NodeExpr expr;
-
-    public NodeFactFuncCall(int pos, String id,NodeExpr expr) {
-        this.pos=pos;
-        this.id=id;
-        this.expr = expr;
+    public NodeFactFuncCall(FuncCall func) {
+        this.func = func;
     }
 
     public double eval(Environment env) throws EvalException {
-        return env.get(pos,id);
+        return func.call(env);
     }
+
 }

@@ -130,7 +130,8 @@ public class Parser {
 				match("(");
 				NodeExpr expr = parseExpr();
 				match(")");
-				return new NodeFactFuncCall(pos(), id.lex(),expr);
+				FuncCall func = new FuncCall(pos(),id.lex(),expr);
+				return new NodeFactFuncCall(func);
 			}
 			return new NodeFactId(pos(), id.lex());
 		}
@@ -211,7 +212,7 @@ public class Parser {
 		return new NodeBegin(nodeBlock);
 	}
 
-	private NodeFuncDecl parseFuncDecl() throws SyntaxException {
+	private FuncDecl parseFuncDecl() throws SyntaxException {
 		match("def");
 		Token funcId = curr();
 		match("id");
@@ -221,7 +222,7 @@ public class Parser {
 		match(")");
 		match("=");
 		NodeExpr expr = parseExpr();
-		return new NodeFuncDecl(funcId.lex(),arguId.lex(),expr);
+		return new FuncDecl(funcId.lex(),arguId.lex(),expr);
 	}
 
 	private NodeStmt parseStmt() throws SyntaxException {
@@ -251,7 +252,7 @@ public class Parser {
 			return new NodeStmtBegin(begin);
 		}
 		if (curr().equals(new Token("def"))) {
-			NodeFuncDecl funcDecl = parseFuncDecl();
+			FuncDecl funcDecl = parseFuncDecl();
 			return new NodeStmtFuncDecl(funcDecl);
 		}
 		return null;

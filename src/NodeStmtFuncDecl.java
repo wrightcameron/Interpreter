@@ -1,9 +1,9 @@
 
 public class NodeStmtFuncDecl extends NodeStmt {
 
-    private NodeFuncDecl funcDecl;
+    private FuncDecl funcDecl;
 
-    public NodeStmtFuncDecl(NodeFuncDecl funcDecl) {
+    public NodeStmtFuncDecl(FuncDecl funcDecl) {
         this.funcDecl = funcDecl;
     }
 
