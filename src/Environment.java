@@ -19,6 +19,7 @@ public class Environment {
         this.funcMap = new HashMap<String, Function>(funcMap);
     }
 
+
     public double put(String var, double val) {
         valMap.put(var, val);
         return val;
