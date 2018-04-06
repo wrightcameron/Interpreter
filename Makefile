@@ -9,15 +9,15 @@ build:
 	mv ./src/*.class ./bin
 
 Interpreter.sh:
-	echo '#!/bin/bash\n' > $@
-	echo 'cd bin\n' >> $@
-	echo 'java Interpreter "$$*"\n' >> $@
+	echo -ne '#!/bin/bash\n' > $@
+	echo -ne 'cd bin\n' >> $@
+	echo -ne 'java Interpreter "$$*"\n' >> $@
 	chmod 754 $@
 
 Scanner.sh:
-	echo '#!/bin/bash\n' > $@
-	echo 'cd bin\n' >> $@
-	echo 'java Scanner "$$*"\n' >> $@
+	echo -ne '#!/bin/bash\n' > $@
+	echo -ne 'cd bin\n' >> $@
+	echo -ne 'java Scanner "$$*"\n' >> $@
 	chmod 754 $@
 
 
